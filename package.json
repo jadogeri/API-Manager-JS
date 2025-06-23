@@ -1,0 +1,30 @@
+{
+  "name": "@josephadogeridev/api-manager-js",
+  "version": "1.0.0",
+  "description": "Javascript npm package which abstracts fetch API for making api calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadogeri/API-Manager-JS.git"
+  },
+  "keywords": [
+    "@josephadogeridev",
+    "api",
+    "react",
+    "react-native",
+    "electronjs",
+    "reactjs",
+    "fetch",
+    "fetchAPI",
+    "@jadogeri"
+  ],
+  "author": "Joseph Adogeri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jadogeri/API-Manager-JS/issues"
+  },
+  "homepage": "https://github.com/jadogeri/API-Manager-JS#readme"
+}
