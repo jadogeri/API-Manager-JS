@@ -25,7 +25,7 @@ class Config {
     instance(){
         return {
             baseUrl : this.#baseUrl,
-            header : this.#headers
+            headers : this.#headers
         }
     }
 
