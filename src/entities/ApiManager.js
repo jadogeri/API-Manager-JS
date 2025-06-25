@@ -1,14 +1,19 @@
 
+import Config from "./Config.js";
+import ApiMethods from "./ApiMethods.js";
+
 class ApiManager {
     #baseUrl ;
     #config;
 
-    constructor(baseUrl = null, header = null){
+    constructor({baseUrl = null, headers = null}){
         this.#config = new Config({
             baseUrl : baseUrl,
-            header : header
+            headers : headers
         });
+
         this.#baseUrl = baseUrl
+
     }
 
     setBaseUrl(url){
@@ -19,24 +24,30 @@ class ApiManager {
         return this.#baseUrl;
     }
 
+    instance(){
+        return this;
+    }
+
     get(endpoint){
-        ApiMethods.getHandler(endpoint, this.#config);
+        return ApiMethods.getHandler(endpoint, this.#config);
     }
 
     put(endpoint, data){
-        ApiMethods.putHandler(endpoint, data, this.#config);
+        return ApiMethods.putHandler(endpoint, data, this.#config);
     }
 
     patch(endpoint, data){
-        ApiMethods.patchHandler(endpoint, data, this.#config);
+        return ApiMethods.patchHandler(endpoint, data, this.#config);
     }
 
     post(endpoint, data){
-        ApiMethods.postHandler(endpoint, data, this.#config);   
+        return ApiMethods.postHandler(endpoint, data, this.#config);   
     }
 
     delete(endpoint){
-        ApiMethods.deleteHandler(endpoint, this.#config);
+        return ApiMethods.deleteHandler(endpoint, this.#config);
     }
 
 }
+
+export default ApiManager;

@@ -14,19 +14,21 @@ class Config {
     getBaseUrl(){
         return this.#baseUrl;
     }
-    setHeader(headers){
+    setHeaders(headers){
         this.#headers = headers;
     }
 
-    getHeader(){
+    getHeaders(){
         return this.#headers;
     }
 
     instance(){
         return {
             baseUrl : this.#baseUrl,
-            header : this.#headers
+            headers : this.#headers
         }
     }
 
 }
+
+export default Config;
