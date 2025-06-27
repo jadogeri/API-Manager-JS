@@ -3,7 +3,7 @@ import Config from "./Config.js";
 import ApiMethods from "./ApiMethods.js";
 
 class ApiManager {
-    #baseUrl ;
+
     #config;
 
     constructor({baseUrl = null, headers = null}){
@@ -11,20 +11,30 @@ class ApiManager {
             baseUrl : baseUrl,
             headers : headers
         });
-
-        this.#baseUrl = baseUrl
-
     }
 
-    setBaseUrl(url){
-        this.#baseUrl = url;
+    getConfig = ()=>{
+        return this.#config;
     }
 
-    getBaseUrl(){
-        return this.#baseUrl;
+    setConfig = (config) =>{
+        this.#config = config;
     }
 
-    instance(){
+    updateHeader = (headers)=>{
+        this.#config.setHeaders(headers);
+    }
+
+    updateBaseUrl = (baseUrl) =>{
+        this.#config.setBaseUrl(baseUrl);
+    }
+
+/**
+     * Returns the current instance of the object.
+     * 
+     * @returns {Object} The current instance.
+     * @throws {None}
+     */    instance(){
         return this;
     }
 

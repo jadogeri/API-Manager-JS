@@ -27,19 +27,21 @@
   "bugs": {
     "url": "https://github.com/jadogeri/API-Manager-JS/issues"
   },
-  "homepage": "https://github.com/jadogeri/API-Manager-JS#readme"
-  ,
+  "homepage": "https://github.com/jadogeri/API-Manager-JS#readme",
   "devDependencies": {
     "@babel/cli": "^7.27.2",
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1"
   },
-    "moduleDirectories": [
+  "moduleDirectories": [
     "node_modules",
     "src"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "jest": "^30.0.3"
   }
 }
