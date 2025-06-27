@@ -1,7 +1,7 @@
 ---
 name: Enhancement Request
 description: Issue to request an enhancement to OPOPPR.
-type: Feature
+#type: Feature
 labels:
   - enhancement
 title: "[Enhancement]: "
