@@ -4,7 +4,7 @@ import ApiMethods from "../../src/entities/ApiMethods.js";
 import Config from "../../src/entities/Config.js";
 
 
-jest.mock("../ApiMethods.js");
+jest.mock("../../src/entities/ApiMethods.js");
 
 describe('ApiManager.post() post method', () => {
     let apiManager;

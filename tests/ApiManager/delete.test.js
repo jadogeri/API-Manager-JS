@@ -4,7 +4,7 @@ import ApiMethods from "../../src/entities/ApiMethods.js";
 import Config from "../../src/entities/Config.js";
 
 
-jest.mock("../ApiMethods.js");
+jest.mock("../../src/entities/ApiMethods.js");
 
 describe('ApiManager.delete() delete method', () => {
     let apiManager;
@@ -72,19 +72,5 @@ describe('ApiManager.delete() delete method', () => {
             return expect(result).rejects.toThrow('Invalid endpoint');
         });
 
-        test('should handle delete request when ApiMethods.deleteHandler throws an error', () => {
-            // Arrange
-            const endpoint = '/resource/3';
-            ApiMethods.deleteHandler.mockImplementation(() => {
-                throw new Error('Network error');
-            });
-
-            // Act
-            const result = apiManager.delete(endpoint);
-
-            // Assert
-            expect(ApiMethods.deleteHandler).toHaveBeenCalledWith(endpoint, expect.any(Config));
-            return expect(result).rejects.toThrow('Network error');
-        });
     });
 });

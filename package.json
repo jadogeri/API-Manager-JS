@@ -4,8 +4,9 @@
   "description": "Javascript npm package which abstracts fetch API for making api calls",
   "main": "index.js",
   "type": "module",
+  
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage --testPathPatterns .*\\.test\\.js$"
   },
   "repository": {
     "type": "git",

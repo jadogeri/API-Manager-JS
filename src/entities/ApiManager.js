@@ -78,6 +78,13 @@ class ApiManager {
      * @returns {Promise} A promise that resolves with the response from the API.
      * @throws {Error} Throws an error if the request fails.
      */
+/**
+     * Sends a POST request to the specified endpoint with the provided data.
+     * @param {string} endpoint - The API endpoint to which the request is sent.
+     * @param {Object} data - The data to be sent in the request body.
+     * @returns {Promise} A promise that resolves with the response from the API.
+     * @throws {Error} Throws an error if the request fails.
+     */
     post(endpoint, data){
         return ApiMethods.postHandler(endpoint, data, this.#config);   
     }

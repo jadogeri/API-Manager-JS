@@ -6,7 +6,7 @@ import Config from "../../src/entities/Config.js";
 
 // Import necessary modules and classes
 // Mock the ApiMethods to isolate the patch method
-jest.mock("../ApiMethods.js");
+jest.mock("../../src/entities/ApiMethods.js");
 
 describe('ApiManager.patch() patch method', () => {
     let apiManager;

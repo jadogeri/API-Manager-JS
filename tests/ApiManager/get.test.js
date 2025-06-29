@@ -6,8 +6,8 @@ import Config from "../../src/entities/Config.js";
 
 // Import necessary modules and dependencies
 // Mock the dependencies
-jest.mock("../Config.js");
-jest.mock("../ApiMethods.js");
+jest.mock("../../src/entities/Config.js");
+jest.mock("../../src/entities/ApiMethods.js");
 
 describe('ApiManager.get() get method', () => {
     let apiManager;
@@ -22,18 +22,14 @@ describe('ApiManager.get() get method', () => {
         };
 
         // Mock the Config class to return the mockConfig
-        Config.mockImplementation(() => ({
-            setHeaders: jest.fn(),
-            setBaseUrl: jest.fn(),
-            ...mockConfig
-        }));
+        Config.mockImplementation(() => mockConfig);
 
-        // Mock the ApiMethods.getHandler function
+        // Create an instance of ApiManager with the mock configuration
+        apiManager = new ApiManager(mockConfig);
+
+        // Mock the getHandler method of ApiMethods
         mockGetHandler = jest.fn();
         ApiMethods.getHandler = mockGetHandler;
-
-        // Initialize ApiManager with the mock configuration
-        apiManager = new ApiManager(mockConfig);
     });
 
     describe('Happy paths', () => {

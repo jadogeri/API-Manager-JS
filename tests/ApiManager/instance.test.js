@@ -3,8 +3,8 @@ import ApiManager from '../../src/entities/ApiManager.js';
 import Config from "../../src/entities/Config.js";
 
 
-jest.mock("../Config.js");
-jest.mock("../ApiMethods.js");
+jest.mock("../../src/entities/Config.js");
+jest.mock("../../src/entities/ApiMethods.js");
 
 describe('ApiManager.instance() instance method', () => {
     let apiManager;
