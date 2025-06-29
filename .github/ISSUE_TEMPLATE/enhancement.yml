@@ -1,6 +1,6 @@
 ---
 name: Enhancement Request
-description: Issue to request an enhancement to OPOPPR.
+description: Issue to request an enhancement to API-Manager-JS.
 #type: Feature
 labels:
   - enhancement
@@ -15,9 +15,7 @@ body:
       label: As a
       description: Select one or more roles that will use this feature.
       options:
-        - label: Tax Preparer
-        - label: Superuser
-        - label: Administrator
+        - label: End User
         - label: Developer
   - type: textarea
     attributes:
