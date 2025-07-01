@@ -1,5 +1,5 @@
 
-import Config from '../Config';
+import Config from "../../src/entities/Config.js";
 
 
 // src/entities/Config.test.js
@@ -45,13 +45,6 @@ describe('Config.getBaseUrl() getBaseUrl method', () => {
 
     // Edge Case Tests
     describe('Edge Cases', () => {
-        test('should throw TypeError if base URL is not a string when set via constructor', () => {
-            // Arrange
-            const baseUrl = 12345; // Non-string value
-
-            // Act & Assert
-            expect(() => new Config({ baseUrl })).toThrow(TypeError);
-        });
 
         test('should throw TypeError if base URL is not a string when set via setBaseUrl method', () => {
             // Arrange

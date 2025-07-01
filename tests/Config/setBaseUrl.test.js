@@ -1,5 +1,5 @@
 
-import Config from '../Config';
+import Config from "../../src/entities/Config.js";
 
 
 // src/entities/Config.test.js
@@ -63,6 +63,7 @@ describe('Config.setBaseUrl() setBaseUrl method', () => {
             config.setBaseUrl(nullUrl);
 
             // Assert
+            console.log(config.getBaseUrl())
             expect(config.getBaseUrl()).toBe(nullUrl);
         });
 

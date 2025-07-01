@@ -1,5 +1,5 @@
 
-import ApiManager from '../ApiManager';
+import ApiManager from '../ApiManager.js';
 import ApiMethods from "../ApiMethods.js";
 import Config from "../Config.js";
 

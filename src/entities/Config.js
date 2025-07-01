@@ -2,7 +2,7 @@ class Config {
     #baseUrl;
     #headers;
 
-    constructor({baseUrl = null, headers= null}){
+    constructor({baseUrl = null,headers = null}) {
         this.#baseUrl = baseUrl;
         this.#headers = headers;
     }
@@ -14,7 +14,18 @@ class Config {
      * @throws {TypeError} If the provided url is not a string.
      */
     setBaseUrl(url){
-        this.#baseUrl = url;
+        if((typeof url =='string' )){
+            this.#baseUrl = url;
+            return;
+        }
+        else if(typeof url == "undefined" || url === null){
+            this.#baseUrl = url;
+            return;
+        }
+        else{
+            throw new TypeError("must be string ,null");
+
+        }
     }
 
 /**
@@ -24,6 +35,7 @@ class Config {
      * @throws {TypeError} If the base URL is not a string.
      */
     getBaseUrl(){
+
         return this.#baseUrl;
     }
 /**

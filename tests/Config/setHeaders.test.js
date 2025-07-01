@@ -1,5 +1,5 @@
 
-import Config from '../Config';
+import Config from "../../src/entities/Config.js";
 
 
 // src/entities/Config.test.js
