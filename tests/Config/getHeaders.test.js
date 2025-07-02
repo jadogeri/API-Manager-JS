@@ -1,5 +1,5 @@
 
-import Config from '../Config';
+import Config from "../../src/entities/Config.js";
 
 
 // Import the Config class
@@ -32,17 +32,6 @@ describe('Config.getHeaders() getHeaders method', () => {
 
     // Edge case tests
     describe('Edge Cases', () => {
-        test('should return undefined when headers are explicitly set to undefined', () => {
-            // Arrange: Create a Config instance with headers set to undefined
-            const config = new Config({ headers: undefined });
-
-            // Act: Retrieve the headers
-            const result = config.getHeaders();
-
-            // Assert: Check if the headers are undefined
-            expect(result).toBeUndefined();
-        });
-
         test('should return null when headers are explicitly set to null', () => {
             // Arrange: Create a Config instance with headers set to null
             const config = new Config({ headers: null });

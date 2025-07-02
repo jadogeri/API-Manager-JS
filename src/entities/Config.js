@@ -3,6 +3,7 @@ class Config {
     #headers;
 
     constructor({baseUrl = null,headers = null}) {
+        
         this.#baseUrl = baseUrl;
         this.#headers = headers;
     }
@@ -18,7 +19,11 @@ class Config {
             this.#baseUrl = url;
             return;
         }
-        else if(typeof url == "undefined" || url === null){
+        else if(url === null){
+            this.#baseUrl = url;
+            return;
+        }
+        else if(url === undefined){
             this.#baseUrl = url;
             return;
         }
