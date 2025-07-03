@@ -72,5 +72,14 @@ describe('ApiManager.delete() delete method', () => {
             return expect(result).rejects.toThrow('Invalid endpoint');
         });
 
+        it('should handle network errors gracefully', async () => {
+            // Arrange
+            const endpoint = '/test-endpoint';
+            ApiMethods.deleteHandler.mockRejectedValue(new Error('Network Error'));
+
+            // Act & Assert
+            await expect(apiManager.delete(endpoint)).rejects.toThrow('Network Error');
+        });
+
     });
 });

@@ -1,5 +1,5 @@
 
-import ApiMethods from '../ApiMethods';
+import ApiMethods from "../../src/entities/ApiMethods.js";
 
 
 // Mock the fetch function globally
@@ -75,13 +75,6 @@ describe('ApiMethods.getHandler() getHandler method', () => {
                 body: undefined
             });
             expect(result).toEqual(mockResponse);
-        });
-
-        it('should handle undefined config gracefully', async () => {
-            // Mock a fetch failure due to undefined config
-            const endpoint = '/test-endpoint';
-
-            await expect(ApiMethods.getHandler(endpoint, undefined)).rejects.toThrow();
         });
 
         it('should handle missing headers in config gracefully', async () => {

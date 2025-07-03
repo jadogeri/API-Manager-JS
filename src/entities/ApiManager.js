@@ -96,6 +96,7 @@ class ApiManager {
      * @throws {Error} Throws an error if the request fails.
      */
     delete(endpoint){
+
         return ApiMethods.deleteHandler(endpoint, this.#config);
     }
 

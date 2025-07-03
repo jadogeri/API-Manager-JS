@@ -63,6 +63,19 @@ describe('ApiManager.get() get method', () => {
             expect(mockGetHandler).toHaveBeenCalledWith(endpoint, newConfig);
             return expect(result).resolves.toBe('success');
         });
+
+        test('should return the result from ApiMethods.getHandler', async () => {
+            // Arrange
+            const endpoint = '/test-endpoint';
+            const expectedResponse = { data: 'test data' };
+            mockGetHandler.mockResolvedValue(expectedResponse);
+
+            // Act
+            const result = await apiManager.get(endpoint);
+
+            // Assert
+            expect(result).toEqual(expectedResponse);
+        });
     });
 
     describe('Edge cases', () => {

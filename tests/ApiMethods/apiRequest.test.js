@@ -1,5 +1,5 @@
 
-import ApiMethods from '../ApiMethods';
+import ApiMethods from "../../src/entities/ApiMethods.js";
 
 
 // src/entities/ApiMethods.test.js

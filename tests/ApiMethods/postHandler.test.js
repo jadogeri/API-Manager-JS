@@ -1,5 +1,5 @@
 
-import ApiMethods from '../ApiMethods';
+import ApiMethods from "../../src/entities/ApiMethods.js";
 
 
 // src/entities/ApiMethods.test.js
@@ -51,6 +51,8 @@ describe('ApiMethods.postHandler() postHandler method', () => {
         });
 
         it('should handle an empty body correctly', async () => {
+
+            
             // Arrange
             const endpoint = '/test-endpoint';
             const responseData = { success: true };
@@ -60,7 +62,7 @@ describe('ApiMethods.postHandler() postHandler method', () => {
             });
 
             // Act
-            const result = await ApiMethods.postHandler(endpoint, undefined, mockConfig);
+            const result = await ApiMethods.postHandler(endpoint, null, mockConfig);
 
             // Assert
             expect(mockFetch).toHaveBeenCalledWith('https://api.example.com/test-endpoint', {

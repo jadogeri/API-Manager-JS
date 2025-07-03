@@ -37,6 +37,9 @@ class ApiMethods {
      * @throws {Error} - Throws an error if the fetch operation fails.
      */
     static getHandler(endpoint, config){
+        if(endpoint === undefined || config === undefined){
+            throw new TypeError("endpoint or config cannot be undefined")
+        }
         return this.apiRequest(config, 'GET', endpoint, null);
     }
 /**

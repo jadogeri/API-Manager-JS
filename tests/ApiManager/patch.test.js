@@ -41,6 +41,20 @@ describe('ApiManager.patch() patch method', () => {
             // Assert
             expect(ApiMethods.patchHandler).toHaveBeenCalledWith(endpoint, undefined, expect.any(Config));
         });
+        it('should handle successful patch request', async () => {
+            // Arrange
+            const endpoint = '/update';
+            const data = { key: 'value' };
+            const response = { success: true };
+            ApiMethods.patchHandler.mockResolvedValue(response);
+
+            // Act
+            const result = await apiManager.patch(endpoint, data);
+
+            // Assert
+            expect(result).toEqual(response);
+        });
+        
     });
 
     describe('Edge cases', () => {
@@ -90,6 +104,31 @@ describe('ApiManager.patch() patch method', () => {
 
             // Assert
             expect(ApiMethods.patchHandler).toHaveBeenCalledWith(endpoint, data, expect.any(Config));
+        });
+        it('should handle patch request with empty data', async () => {
+        // Arrange
+        const endpoint = '/update';
+        const data = {};
+        const response = { success: true };
+        ApiMethods.patchHandler.mockResolvedValue(response);
+
+        // Act
+        const result = await apiManager.patch(endpoint, data);
+
+        // Assert
+        expect(ApiMethods.patchHandler).toHaveBeenCalledWith(endpoint, data, expect.any(Config));
+        expect(result).toEqual(response);
+        });
+
+        it('should throw an error if patchHandler fails', async () => {
+        // Arrange
+        const endpoint = '/update';
+        const data = { key: 'value' };
+        const errorMessage = 'Network Error';
+        ApiMethods.patchHandler.mockRejectedValue(new Error(errorMessage));
+
+        // Act & Assert
+        await expect(apiManager.patch(endpoint, data)).rejects.toThrow(errorMessage);
         });
     });
 });

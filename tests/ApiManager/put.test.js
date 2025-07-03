@@ -43,6 +43,44 @@ describe('ApiManager.put() put method', () => {
             // Assert
             expect(result).toEqual(response);
         });
+        it('should handle PUT requests with different data structures', async () => {
+            // Arrange
+            const endpoint = '/update';
+            const data = { nested: { key: 'value' }, array: [1, 2, 3] };
+            const expectedResponse = { success: true };
+            ApiMethods.putHandler.mockResolvedValue(expectedResponse);
+
+            // Act
+            const response = await apiManager.put(endpoint, data);
+
+            // Assert
+            expect(ApiMethods.putHandler).toHaveBeenCalledWith(endpoint, data, expect.any(Config));
+            expect(response).toEqual(expectedResponse);
+        });
+        test('should call putHandler with correct endpoint and data', () => {
+            // Arrange
+            const endpoint = '/test-endpoint';
+            const data = { key: 'value' };
+
+            // Act
+            apiManager.put(endpoint, data);
+
+            // Assert
+            expect(ApiMethods.putHandler).toHaveBeenCalledWith(endpoint, data, expect.any(Config));
+        });
+
+        test('should use the correct configuration for the request', () => {
+            // Arrange
+            const endpoint = '/another-endpoint';
+            const data = { anotherKey: 'anotherValue' };
+
+            // Act
+            apiManager.put(endpoint, data);
+
+            // Assert
+            const config = apiManager.getConfig();
+            expect(ApiMethods.putHandler).toHaveBeenCalledWith(endpoint, data, config);
+        });
     });
 
     describe('Edge cases', () => {
@@ -100,6 +138,26 @@ describe('ApiManager.put() put method', () => {
 
             // Act & Assert
             await expect(apiManager.put(endpoint, data)).rejects.toThrow(errorMessage);
+        });
+
+        it('should throw an error if the endpoint is invalid', async () => {
+            // Arrange
+            const endpoint = '';
+            const data = { key: 'value' };
+            ApiMethods.putHandler.mockRejectedValue(new Error('Invalid endpoint'));
+
+            // Act & Assert
+            await expect(apiManager.put(endpoint, data)).rejects.toThrow('Invalid endpoint');
+        });
+
+        it('should throw an error if the data is null', async () => {
+            // Arrange
+            const endpoint = '/update';
+            const data = null;
+            ApiMethods.putHandler.mockRejectedValue(new Error('Data cannot be null'));
+
+            // Act & Assert
+            await expect(apiManager.put(endpoint, data)).rejects.toThrow('Data cannot be null');
         });
     });
 });
