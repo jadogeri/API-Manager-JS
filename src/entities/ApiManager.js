@@ -1,4 +1,10 @@
-
+/**
+ * @author      Joseph Adogeri
+ * @since       3-JUL-2025
+ * @version     1.0
+ * @description Api Manager class
+ *  
+ */
 import Config from "./Config.js";
 import ApiMethods from "./ApiMethods.js";
 
@@ -38,7 +44,7 @@ class ApiManager {
         return this;
     }
 
-   /**
+    /**
      * Retrieves the API handler for the specified endpoint using the configured settings.
      * 
      * @param {string} endpoint - The API endpoint to retrieve the handler for.
@@ -49,36 +55,29 @@ class ApiManager {
         return ApiMethods.getHandler(endpoint, this.#config);
     }
 
-/**
- * Sends a PUT request to the specified endpoint with the provided data.
- * @param {string} endpoint - The API endpoint to send the request to.
- * @param {Object} data - The data to be sent in the request body.
- * @returns {Promise} A promise that resolves with the response from the API.
- * @throws {Error} Throws an error if the request fails.
- */
-    put(endpoint, data){
-        return ApiMethods.putHandler(endpoint, data, this.#config);
-    }  
-
-/**
- * Sends a PATCH request to the specified endpoint with the provided data.
- * @param {string} endpoint - The API endpoint to send the request to.
- * @param {Object} data - The data to be sent in the request body.
- * @returns {Promise} A promise that resolves with the response from the API.
- * @throws {Error} Throws an error if the request fails.
- */
-    patch(endpoint, data){
-        return ApiMethods.patchHandler(endpoint, data, this.#config);
-    }
-
-/**
-     * Sends a POST request to the specified endpoint with the provided data.
+    /**
+     * Sends a PUT request to the specified endpoint with the provided data.
      * @param {string} endpoint - The API endpoint to send the request to.
      * @param {Object} data - The data to be sent in the request body.
      * @returns {Promise} A promise that resolves with the response from the API.
      * @throws {Error} Throws an error if the request fails.
      */
-/**
+    put(endpoint, data){
+        return ApiMethods.putHandler(endpoint, data, this.#config);
+    }  
+
+    /**
+     * Sends a PATCH request to the specified endpoint with the provided data.
+     * @param {string} endpoint - The API endpoint to send the request to.
+     * @param {Object} data - The data to be sent in the request body.
+     * @returns {Promise} A promise that resolves with the response from the API.
+     * @throws {Error} Throws an error if the request fails.
+     */
+    patch(endpoint, data){
+        return ApiMethods.patchHandler(endpoint, data, this.#config);
+    }
+
+    /**
      * Sends a POST request to the specified endpoint with the provided data.
      * @param {string} endpoint - The API endpoint to which the request is sent.
      * @param {Object} data - The data to be sent in the request body.

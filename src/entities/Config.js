@@ -1,3 +1,10 @@
+/**
+ * @author      Joseph Adogeri
+ * @since       3-JUL-2025
+ * @version     1.0
+ * @description Config class
+ *  
+ */
 class Config {
     #baseUrl;
     #headers;
@@ -8,7 +15,7 @@ class Config {
         this.#headers = headers;
     }
 
-/**
+    /**
      * Sets the base URL for the instance.
      * @param {string} url - The base URL to be set.
      * @returns {void}
@@ -33,7 +40,7 @@ class Config {
         }
     }
 
-/**
+    /**
      * Retrieves the base URL from the private property.
      * 
      * @returns {string} The base URL.
@@ -43,29 +50,29 @@ class Config {
 
         return this.#baseUrl;
     }
-/**
- * Retrieves the base URL for the application.
- * This function constructs and returns the base URL as a string.
- * 
- * @returns {string} The base URL.
- * @throws {Error} Throws an error if the URL cannot be constructed.
- */
+    /**
+     * Retrieves the base URL for the application.
+     * This function constructs and returns the base URL as a string.
+     * 
+     * @returns {string} The base URL.
+     * @throws {Error} Throws an error if the URL cannot be constructed.
+     */
     setHeaders(headers){
         this.#headers = headers;
     }
 
-/**
- * Validates the base URL input. Ensures that the provided base URL is a string.
- * 
- * @param {string} baseUrl - The base URL to validate.
- * @returns {boolean} - Returns true if the base URL is a valid string, otherwise false.
- * @throws {TypeError} If the base URL is not a string.
- */
+    /**
+     * Validates the base URL input. Ensures that the provided base URL is a string.
+     * 
+     * @param {string} baseUrl - The base URL to validate.
+     * @returns {boolean} - Returns true if the base URL is a valid string, otherwise false.
+     * @throws {TypeError} If the base URL is not a string.
+     */
     getHeaders(){
         return this.#headers;
     }
 
-/**
+    /**
      * Retrieves the base URL for the application.
      * @returns {string} The base URL as a string.
      * @throws {Error} If the base URL is not defined.
