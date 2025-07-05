@@ -1,4 +1,4 @@
-# **USE RESULTS JS**
+# **API MANAGER JS**
 
 **Version:** 1.0.0
 **Date:** July 3, 2025
@@ -7,7 +7,7 @@
 
 ## Description ##
 
-This is a javascript npm package for retreiving data from api. This react hook abstracts fetch api implementaion.
+This is a javascript npm package for retreiving data from api. This module abstracts fetch api implementaion.
 
 ## Authors ##
 
@@ -25,8 +25,8 @@ This is a javascript npm package for retreiving data from api. This react hook a
 
 | ![Screenshot 1](assets/images/screenshot1.png) | ![screenshot 2](assets/images/screenshot2.png) |
 | -------------------------------------------- | -------------------------------------------- |
-|                                              |                                              |
-
+| ![Screenshot 1](assets/images/screenshot3.png) | ![screenshot 2](assets/images/screenshot4.png) |
+| -------------------------------------------- | -------------------------------------------- |
 ## Table of Contents ##
 
 <ul>
@@ -43,16 +43,19 @@ This is a javascript npm package for retreiving data from api. This react hook a
       </li>
     </ul>
     <ul>
-        <li><a href="#3-usage">3. Usage</a> </li>
+      <li><a href="#3-usage">3. Usage</a> </li>
         <ul>
-            <li><a href="#30-install-dependency">3.0 Install Dependency</a> </li>
-        <li><a href="#31-initialization">3. Initialization</a> </li>
-        <ul>
-            <li><a href="#310-useresults-hook-call-arguments">3.1.0 Use Results Hook Call Arguments</a> </li>
-            <li><a href="#311-useresults-hook-return-array">3.1.1 Use Results Hook Return Array</a> </li>
-            <li><a href="#312-searchapi-function">3.1.2 Search API Function</a> </li>
-        </ul>
-            <li><a href="#32-code-snippet">3.2 Code Snippet</a> </li>
+          <li><a href="#30-install-dependency">3.0 Install Dependency</a> </li>
+          <li><a href="#31-initialization">3.1 Initialization</a> </li>
+            <ul>
+                <li><a href="#310-api-manager-object">3.1.0 API Manager Object</a> </li>
+                <li><a href="#311-config-object">3.1.1 Config Object</a> </li>
+            </ul>
+          <li><a href="#32-class-and-methods">3.2 Class and Methods</a> </li>
+           <ul>
+            <li><a href="#321-apimanager-class">3.2.1 API Manager Class</a> </li>
+            </ul>
+          <li><a href="#33-code-snippet">3.3 Code Snippet</a> </li>
         </ul>
     </ul> 
     <ul>
@@ -82,9 +85,9 @@ This document outlines the package architecture, components, and design consider
 
 This package will allow users to:
 
-- Fetch data (GET) from an api.
-- Allows headers to be set after initialization.
-- Results utilize state management.
+- Performs GET, POST, PUT, PATCH and DELETE requests.
+- Allows headers and baseUrl to be set after initialization.
+- Abstracts Fetch API implementation..
 
 ### 1.3 Intended Audience ###
 
@@ -118,38 +121,95 @@ This package will allow users to:
 
 ### 3.1 Initialization ###
 
-#### 3.1.0 useResults Hook Call Arguments ####
+#### 3.1.0 API Manager Object ####
 
 | Name        | Type   | Description                                        | Requirement              |
 | ----------- | ------ | -------------------------------------------------- | ------------------------ |
-| baseURL     | String | The base url for a set of related URLs of the api. | Required                 |
+| config     | Object | The configuration of an API request. | Required                 |
 | baseRoute   | String | The initial route or path of the api.             | Required                 |
 | baseHeaders | String | The initial headers of the api.                   | Optional, defaults to {} |
+| getConfig    | Function | Returns config object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| setConfig    | Function | updates the config object.. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| updateHeader    | Function | updates headers object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| updateBaseUrl   | Function | update BaseUrl string. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| instance    | Function | Returns object instance | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| get    | Function | calls the sever/backend with GET request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| put   | Function | calls the sever/backend with PUT request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| patch   | Function | calls the sever/backend with PATCH request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| post   | Function | calls the sever/backend with POST request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| delete   | Function | calls the sever/backend with DELETE request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 
-#### 3.1.1 useResults Hook Return Array ####
-
-| Name        | Type   | Description                                        | Requirement              |
-| ----------- | ------ | -------------------------------------------------- | ------------------------ |
-| searchApi    | Function | calls the api with argurments. | Required, <i>See <a href="#312-searchapi-function">SearchApi Function</a> for usage</i> .            |
-| results   | Array | The data fetched from the api.             | Required, display data retrieved                |
-| errorMessage | String | Display error returned from the api.                   | Required, debugging |
-
-searchApi, results, errorMessage
-#### 3.1.2 searchApi function ####
+#### 3.1.1 Config Object ####
 
 | Name    | Type   | Description                                | Requirement              |
 | ------- | ------ | ------------------------------------------ | ------------------------ |
-| route   | String | The path to a resource. | Required                 |
-| params  | Object | The params appended to query srting.       | Optional, defaults to "" |
-| headers | Object | Sets the headers of the api call .         | Optional, defaults to {} |
+| baseUrl   | String | The baseUrl to a resource. | Required, defaults to null                 |
+| headers | Object | Sets the headers of the api call .         | Required, defaults to null |
 
-### 3.2 Code Snippet ###
+### 3.2 Class and Methods ###
 
-```ruby
+This project includes the following core components:
+
+#### 3.2.1 `ApiManager` Class ####
+
+The `ApiManager` class represents a single ApiManager instance with its attributes and methods.
+
+*   **Attributes:**
+    *   `config` (object): The configuration of the api.
+*   **Methods:**
+    *   `constructor({ baseUrl, headers })`: The constructor method to initialize a new `ApiManager` object.
+        *   **Parameters:**
+            *   `baseUrl` (string): The base url of api request.
+            *   `headers` (object): The headers passed to api request.
+        *   **Description:** Creates a new `ApiManager` instance with the provided baseUrl and headers.
+    *   `getConfig()`: Returns a `Config` object.
+        *   **Description:** Retrieves the `Config` object.
+    *   `setConfig(config)`: Updates the config attribute.
+        *   **Parameters:**
+            *   `config` (`object` ): The new config of a ApiManager.
+        *   **Description:** updates the config of the ApiManager object.
+    *   `updateHeader(email)`: Updates the headers of the config attribute.
+        *   **Parameters:**
+            *   `headers` (`object` ): The new headers of a config object.
+        *   **Description:** updates the headers of the config object.
+    *   `updateBaseUrl(string)`: Updates the base url of the config attribute.
+        *   **Parameters:**
+            *   `baseUrl` (`string` ): The new base url of a config object.
+        *   **Description:** updates the base url of the config object.
+    *   `instance()`: Returns a ApiManager instance.
+        *   **Description:** Retrieves the ApiManager instance as a readable javascript object.
+    *   `get(endpoint)`: Sends a GET request.
+        *   **Description:** Sends a GET request to the specified endpoint with the provided data.
+        *   **Parameters:**
+            *   `endpoint` (`string` ): The endpoint of a api Request.
+    *   `put(endpoint, data)`: Sends a PUT request.
+        *   **Description:** Sends a PUT request to the specified endpoint with the provided data.
+        *   **Parameters:**
+            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `data` (`object` ): The data to be sent in the request body.
+    *   `patch(endpoint, data)`: Sends a PATCH request.
+        *   **Description:** Sends a PATCH request to the specified endpoint with the provided data.
+        *   **Parameters:**
+            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `data` (`object` ): The data to be sent in the request body.
+    *   `post(endpoint, data)`: Sends a POST request.
+        *   **Description:** Sends a POST request to the specified endpoint with the provided data.
+        *   **Parameters:**
+            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `data` (`object` ): The data to be sent in the request body.
+    *   `delete(endpoint)`: Sends a DELETE request.
+        *   **Description:** Sends a DELETE request to the specified endpoint with the provided data.
+        *   **Parameters:**
+            *   `endpoint` (`string` ): The endpoint of a api Request.
+  
+
+### 3.3 Code Snippet ###
+
+```javascript
 
 import logo from './logo.svg';
 import './App.css';
-import useResultsJs from '@josephadogeridev/use-results-js';
+import useResultsJs from '@josephadogeridev/api-manager-js';
 
 function App() {
 
@@ -194,12 +254,12 @@ export default App;
 
 #### 4.1 Test from node_modules ####
 
-note : run test from node_modules after `<a href="#3-usage">` Usage `</a>`
+note : run test from node_modules after <a href="#3-usage">Usage</a>
 
-1 Navigate to cd @josephadogeridev/use-results-js directory using command below.
+1 Navigate to cd @josephadogeridev/api-manager-js directory using command below.
 
 ```bash
-  cd node_modules/@josephadogeridev/use-results-js
+  cd node_modules/@josephadogeridev/api-manager-js
 ```
 
 2 Type npm run test to run unit tests.
@@ -208,7 +268,7 @@ note : run test from node_modules after `<a href="#3-usage">` Usage `</a>`
   npm run test
 ```
 
-![](assets/images/testusingjest.png)
+![](assets/images/jest.png)
 
 #### 4.2 Test using NPM Link ####
 
@@ -220,44 +280,61 @@ Note : this test was done pre publish to npm manager
   npm link
 ```
 
-![](assets/images/npmlink.png)
+![](assets/images/prenpmlink.png)
 
 2 Create or use existing React Application.
 
-3 Run command npm link @josephadogeridev/use-results-js to install created package.
+3 Run command npm link @josephadogeridev/api-manager-js to install created package.
 
 ```bash
-  npm link @josephadogeridev/use-results-js
+  npm link @josephadogeridev/api-manager-js
 ```
 
-![](assets/images/afternpmlink.png)
+![](assets/images/postnpmlink.png)
 
-```ruby
+```javascript
 
 import logo from './logo.svg';
 import './App.css';
-import useResultsJs from '@josephadogeridev/use-results-js';
+import ApiManager from '@josephadogeridev/api-manager-js';
+import { useState } from 'react';
 
 function App() {
+  const [data, setData]= useState([]);
+  const baseUrl = "http://localhost:5500/api";
+  const headers = {
+    'Content-Type': 'application/json',
+    "Accept":'application/json'       
+  }
 
-  const [searchApi, results, errorMessage] 
-    = useResultsJs({baseURL:"http://localhost:5000", baseRoute:"/"})
+  const apiManager = new ApiManager({baseUrl:baseUrl, headers: headers});
+
+  const handleGetButtonClick = async () =>{
+
+    const response = await apiManager.get("/object");
+    setData(response);    
+  }
   return (
+
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={(()=>{ searchApi({route:"/objects/"} )})}>
-          press
-        </button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>
-          {JSON.stringify(results,null,4)}
-        </p>      
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+        <button onClick={()=>{handleGetButtonClick()}}>
+          handle get objects
+        </button>
+        {JSON.stringify(data, null, 4)}
       </header>
-      <div>
-      </div>
     </div>
   );
 }
@@ -280,19 +357,19 @@ Note : this test was done pre publish to npm manager
   npm pack
 ```
 
-![](assets/images/npmpack.png)
+![](assets/images/prenpmpack.png)
 
 2 Create or use existing React Application.
 
 3 Copy and paste the created file in the root of a React Application.
 
-4 Run command npm install josephadogeridev-use-results-js-1.0.0.tgz to install created package.
+4 Run command npm install josephadogeridev-api-manager-js-1.0.0.tgz to install created package.
 
 ```bash
-  npm install josephadogeridev-use-results-js-1.0.0.tgz
+  npm install josephadogeridev-api-manager-js-1.0.0.tgz
 ```
 
-![](assets/images/npmpackinstall.png)
+![](assets/images/postnpmpack.png)
 
 ## 5. License ##
 
