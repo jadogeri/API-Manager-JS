@@ -126,18 +126,16 @@ This package will allow users to:
 | Name        | Type   | Description                                        | Requirement              |
 | ----------- | ------ | -------------------------------------------------- | ------------------------ |
 | config     | Object | The configuration of an API request. | Required                 |
-| baseRoute   | String | The initial route or path of the api.             | Required                 |
-| baseHeaders | String | The initial headers of the api.                   | Optional, defaults to {} |
 | getConfig    | Function | Returns config object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | setConfig    | Function | updates the config object.. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | updateHeader    | Function | updates headers object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | updateBaseUrl   | Function | update BaseUrl string. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | instance    | Function | Returns object instance | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
-| get    | Function | calls the sever/backend with GET request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
-| put   | Function | calls the sever/backend with PUT request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
-| patch   | Function | calls the sever/backend with PATCH request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
-| post   | Function | calls the sever/backend with POST request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
-| delete   | Function | calls the sever/backend with DELETE request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| get    | Function | calls the server/backend with GET request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| put   | Function | calls the server/backend with PUT request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| patch   | Function | calls the server/backend with PATCH request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| post   | Function | calls the server/backend with POST request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
+| delete   | Function | calls the server/backend with DELETE request. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 
 #### 3.1.1 Config Object ####
 
@@ -155,12 +153,12 @@ This project includes the following core components:
 The `ApiManager` class represents a single ApiManager instance with its attributes and methods.
 
 *   **Attributes:**
-    *   `config` (object): The configuration of the api.
+    *   `config` (object): The configuration of the API.
 *   **Methods:**
     *   `constructor({ baseUrl, headers })`: The constructor method to initialize a new `ApiManager` object.
         *   **Parameters:**
-            *   `baseUrl` (string): The base url of api request.
-            *   `headers` (object): The headers passed to api request.
+            *   `baseUrl` (string): The base url of API request.
+            *   `headers` (object): The headers passed to API request.
         *   **Description:** Creates a new `ApiManager` instance with the provided baseUrl and headers.
     *   `getConfig()`: Returns a `Config` object.
         *   **Description:** Retrieves the `Config` object.
@@ -181,67 +179,111 @@ The `ApiManager` class represents a single ApiManager instance with its attribut
     *   `get(endpoint)`: Sends a GET request.
         *   **Description:** Sends a GET request to the specified endpoint with the provided data.
         *   **Parameters:**
-            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `endpoint` (`string` ): The endpoint of an API Request.
     *   `put(endpoint, data)`: Sends a PUT request.
         *   **Description:** Sends a PUT request to the specified endpoint with the provided data.
         *   **Parameters:**
-            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `endpoint` (`string` ): The endpoint of an API Request.
             *   `data` (`object` ): The data to be sent in the request body.
     *   `patch(endpoint, data)`: Sends a PATCH request.
         *   **Description:** Sends a PATCH request to the specified endpoint with the provided data.
         *   **Parameters:**
-            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `endpoint` (`string` ): The endpoint of an API Request.
             *   `data` (`object` ): The data to be sent in the request body.
     *   `post(endpoint, data)`: Sends a POST request.
         *   **Description:** Sends a POST request to the specified endpoint with the provided data.
         *   **Parameters:**
-            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `endpoint` (`string` ): The endpoint of an API Request.
             *   `data` (`object` ): The data to be sent in the request body.
     *   `delete(endpoint)`: Sends a DELETE request.
         *   **Description:** Sends a DELETE request to the specified endpoint with the provided data.
         *   **Parameters:**
-            *   `endpoint` (`string` ): The endpoint of a api Request.
+            *   `endpoint` (`string` ): The endpoint of an API Request.
   
 
 ### 3.3 Code Snippet ###
 
+Note: <b>This is a demo. Please change baseUrl, headers, endpoint and data
+to fit your usage.<b>
+
 ```javascript
 
-import logo from './logo.svg';
 import './App.css';
-import useResultsJs from '@josephadogeridev/api-manager-js';
-
+import ApiManager from '@josephadogeridev/api-manager-js';
+import { useState } from 'react';
 function App() {
 
-  const [searchApi, results, errorMessage] 
-    = useResultsJs({baseURL:"http://localhost:5000",
-                   baseRoute:"/", 
-                   baseHeaders : null,
-                   baseParams: null})
+  const apiManager = new ApiManager({
+    baseUrl : "http://localhost:5500/api",
+    headers : {
+    'Content-Type': 'application/json',
+    "Accept":'application/json'       
+    }
+
+  })
+
+  const [data , setData] = useState(null)
+  
+  const handleGet = async ()=>{
+     const res = await apiManager.get("/item");
+     setData(res)
+  }
+
+  const handlePost = async ()=>{
+     const res = await apiManager.post("/item",{name:"test"});
+    const fetchdata = await apiManager.get("/item");
+     setData(fetchdata)
+
+  } 
+   const handlePut = async ()=>{
+     await apiManager.put("/item/6867348dd8b181ba1f77b14a",{name:"chicken",});
+   const fetchdata = await apiManager.get("/item");
+    setData(fetchdata)
+
+  } 
+   const handlePatch = async ()=>{
+     await apiManager.patch("/item/686735b1d8b181ba1f77b150",{name:"ronaldo",description:"cr7"});
+    const fetchdata = await apiManager.get("/item");
+    setData(fetchdata)
+
+  }  
+  const handleDelete = async ()=>{
+     const res = await apiManager.delete("/item");
+     setData([])
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={(()=>{ searchApi({route:"/objects/2", params:{id:1,t:2} } )})}>
-          press
-        </button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>
-          {JSON.stringify(results,null,4)}
-        </p>      
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+        <p><i>GET ALL</i></p>
+        <button onClick={handleGet}>
+          handle Get
+        </button>
+        <button onClick={handlePost}>
+          handle Post
+        </button>     
+  
+        <button onClick={handlePatch}>
+          handle Patch
+        </button>        
+        <button onClick={handlePut}>
+          handle Put
+        </button>    
+            <p><i>DELETE</i></p>   
+         <button onClick={handleDelete}>
+          handle delete
+        </button>
+        </div>
+        {
+          JSON.stringify(data, null, 4)
+        }
+
       </header>
-      <div>
-      </div>
     </div>
   );
 }
