@@ -125,7 +125,7 @@ This package will allow users to:
 
 | Name        | Type   | Description                                        | Requirement              |
 | ----------- | ------ | -------------------------------------------------- | ------------------------ |
-| config     | Object | The configuration of an API request. | Required                 |
+| config     | Object | The configuration of an API request. | Required.                 |
 | getConfig    | Function | Returns config object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | setConfig    | Function | updates the config object.. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
 | updateHeader    | Function | updates headers object. | Required, <i>See <a href="#32-class-and-methods">Class and Methods</a> for usage</i> .            |
@@ -141,8 +141,8 @@ This package will allow users to:
 
 | Name    | Type   | Description                                | Requirement              |
 | ------- | ------ | ------------------------------------------ | ------------------------ |
-| baseUrl   | String | The baseUrl to a resource. | Required, defaults to null                 |
-| headers | Object | Sets the headers of the api call .         | Required, defaults to null |
+| baseUrl   | String | The baseUrl to a resource. | Required, defaults to null.                 |
+| headers | Object | Sets the headers of the API call .         | Required, defaults to null. |
 
 ### 3.2 Class and Methods ###
 
@@ -164,7 +164,7 @@ The `ApiManager` class represents a single ApiManager instance with its attribut
         *   **Description:** Retrieves the `Config` object.
     *   `setConfig(config)`: Updates the config attribute.
         *   **Parameters:**
-            *   `config` (`object` ): The new config of a ApiManager.
+            *   `config` (`object` ): The new config of the ApiManager.
         *   **Description:** updates the config of the ApiManager object.
     *   `updateHeader(email)`: Updates the headers of the config attribute.
         *   **Parameters:**
