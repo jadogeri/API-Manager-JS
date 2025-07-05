@@ -21,7 +21,9 @@
     "reactjs",
     "fetch",
     "fetchAPI",
-    "@jadogeri"
+    "@jadogeri",
+    "josephadogeridev/api-manager-js",
+    "@josephadogeridev/api-manager-js"
   ],
   "author": "Joseph Adogeri",
   "license": "MIT",
